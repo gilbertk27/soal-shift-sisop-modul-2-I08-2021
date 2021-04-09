@@ -11,6 +11,9 @@
 #include <sys/stat.h>
 #include <sys/prctl.h>
 
+
+//sudo date --set="2021-04-09 16:21:59"
+//sudo date --set="2021-04-09 22:21:59"
 int main() {
 
 
@@ -24,7 +27,8 @@ char *links[3] = {
 char *zipname[3] = {"Foto_for_Stevany.zip","Musik_for_Stevany.zip","Film_for_Stevany.zip"};
 char *filename[3] = {"Pyoto","Musyik","Fylm"};
 
-/*	
+	
+while(1){
 int x, tanggal, bulan, jam, menit, detik;
   	time_t T= time(NULL);
         struct  tm tm = *localtime(&T);
@@ -33,23 +37,16 @@ int x, tanggal, bulan, jam, menit, detik;
 	time_t times = time(NULL);
     struct tm *timeNow = localtime(&times);
     
-    int bDay = 23;
+    int bDay = 9;
   int bMonth = 4;
-  int bHour = 23;
-  int bMinute = 39;
+  int bHour = 22;
+  int bMinute = 22;
     int nDay = timeNow -> tm_mday;
     int nMonth = timeNow -> tm_mon + 1;
     int nHour = timeNow -> tm_hour;
     int nMinute = timeNow -> tm_min;
     int nSecond = timeNow -> tm_sec;	
-	
-        tanggal = tm.tm_mday;
-        bulan = tm.tm_mon + 1;
-        jam = tm.tm_hour;
-        menit = tm.tm_min;
-        detik = tm.tm_sec;
 
-while(1){
         // Proses yang akan dijalankan pada tgl 9 April
         // Karena soal a,b,c harus dijalankan 6 jam sebelum ultah stevany maka 22-6 = 16
 	
@@ -57,7 +54,7 @@ while(1){
 	 {
       	 if(bHour - 6 == nHour)
          {
-*/     
+    
          
 	pid_t pid1 = fork();	
    	int status;
@@ -137,12 +134,12 @@ while(1){
 			char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL};
 			execv("/usr/bin/unzip", arg);
 		}
-//}	  
+}	  
 	
 	
 	// Saat waktu menunjukkan ulang tahun stevany yaitu jam == 22 maka lakukan proses d, e, f
 	//if(tanggal==9 && bulan==4 && jam==22 && menit==22 && detik == 0){
-//	if(bHour == nHour){   
+	if(bHour == nHour){   
 	
 	int status_7;
 	while(wait(&status_7) > 0);
@@ -260,6 +257,9 @@ while(1){
                execv("/bin/zip", argv);
             	}
             }
-// }
-//}
-//}
+
+ }
+
+}
+}
+
