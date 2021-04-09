@@ -9,42 +9,137 @@
 #### 1 a. Because she likes the letter Y so much, He wanted the name of the folder as Musyik for mp3, Fylm for mp4, and Pyoto for jpg
   		pid_t pid2 = fork();
 		if(pid2 == 0) {
-       		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
-       			execv("/bin/mkdir",argv);
-		}
-		else {
-			sleep(5);
-        	        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm",NULL};
-                	execv("/bin/mkdir",arg2);
-		}
-		}
-		else {
-                        sleep(5);
-                        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto",NULL};
-                        execv("/bin/mkdir",arg2);
+  		      char *argv[] = {"mkdir", "-p", filename[0], filename[1], filename[2], NULL};
+        	      execv("/bin/mkdir", argv);
+    		}
                        
 ##### Explanation 1a
 	1. pid_t pid2 = fork() to create a new process
 	2. if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
-	3. sleep(5) The program first pauses for five seconds and creates a new folder
+	3.
 #### 1 b. For music, he downloads it from the link below, so are the cases for films and photos.
-		...
+	int status_1;
+	while(wait(&status_1) > 0);
+		pid_t pid_1 = fork();
+		if(pid_1 < 0) exit(0);
+		if(pid_1 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp&export=download","-O" ,"Film_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+			
+		}
+		  
+			
+			
+	int status_2;
+	while(wait(&status_2) > 0);
+		pid_t pid_2 = fork();
+		if(pid_2 < 0) exit(0);
+		if(pid_2 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download","-O" ,"Musik_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+		}
+		  
+			
+	int status_3;
+	while(wait(&status_3) > 0);
+		pid_t pid_3 = fork();
+		if(pid_3 < 0) exit(0);
+		if(pid_3 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+		}
 ##### Explanation 1b
 	...
 #### 1 c. he didn’t want the folder to contain the zip files so he extracts the files first after downloading it.
-		...
+	int status_4;
+	while(wait(&status_4) > 0);
+		pid_t pid4 = fork();
+		if(pid4 < 0) exit(0);
+		if(pid4 == 0) {
+			char *arg[] = {"unzip", "-q", "Musik_for_Stevany.zip","-d","Musyik", NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+		  
+		
+	int status_5;
+	while(wait(&status_5) > 0);
+		pid_t pid5 = fork();
+		if(pid5 < 0) exit(0);
+		if(pid5 == 0) {
+			char *arg[] = {"unzip", "-q", "Film_for_Stevany.zip","-d","Fylm", NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+		  
+
+	int status_6;
+	while(wait(&status_6) > 0);
+		pid_t pid6 = fork();
+		if(pid6 < 0) exit(0);
+		if(pid6 == 0) {
+			char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+}	  
 ##### Explanation 1c
 	...
 #### 1 d. moving it to the folder that has been made (only the files).
-		...
+	int status_7;
+	while(wait(&status_7) > 0);
+		pid_t pid7 = fork();
+		if (pid7 < 0) exit(0);
+		if (pid7 == 0) {                 
+    			DIR *folder1;
+    			DIR *folder2;
+    			DIR *folder3;
+    			struct dirent *entry;
+    			int files = 0;
+			
+			char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
+    			dir2[255],
+         		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
+         		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/";
+    			
+   			folder1 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/");
+   			folder2 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/");
+   			folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/");
+
 ##### Explanation 1d
 	...
 #### 1 e. When it’s her birthday, all folder will be zipped with the name Lopyu_Stevany.zip and all the folders will be deleted. (Only the zip remains).
-		...
+	int status_8;
+        	while(wait(&status_8) > 0);
+        	pid_t pid11;
+        	pid11 = fork();
+        	if (pid11 < 0) exit(0);
+            	if (pid11 == 0) 
+           	{
+	char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
+               execv("/bin/zip", argv);
 ##### Explanation 1e
 	...
 #### 1 f. To make his life easier, he wants all of the above to run automatically 6 hours before her birthday (except for point e of course)
-		...
+	while(1){
+int x, tanggal, bulan, jam, menit, detik;
+  	time_t T= time(NULL);
+        struct  tm tm = *localtime(&T);
+
+	time_t times = time(NULL);
+    struct tm *timeNow = localtime(&times);
+    
+    int bDay = 9;	
+    int bMonth = 4;
+    int bHour = 22;
+    int bMinute = 22;
+    int nDay = timeNow -> tm_mday;
+    int nMonth = timeNow -> tm_mon + 1;
+    int nHour = timeNow -> tm_hour;
+    int nMinute = timeNow -> tm_min;
+    int nSecond = timeNow -> tm_sec;
+    
+	if((bDay == nDay) && (bMonth == nMonth) && (bMinute == nMinute) && (0 == nSecond))
+	 {
+      	 if(bHour - 6 == nHour)
+         {
 ##### Explanation 1f
 	...
 ### NO. 2
