@@ -15,7 +15,7 @@
 int main() {
     int status, status2, status3, status4;
 
-    //soal a
+    //soal a (unzip the file)
     pid_t cid;
     cid = fork();
     if(cid < 0) exit(0);
@@ -24,7 +24,7 @@ int main() {
         execv("/usr/bin/unzip", arg);
         int status;
     }
-    
+    //soal a (remove the unnecesarry file)
     while(wait(&status) > 0);
     DIR *dirp;
     struct dirent *entry;
@@ -44,8 +44,7 @@ int main() {
         int status2;
     }
     
-    //soal b
-    
+    //soal b (check the available name of the file)
     while(wait(&status2) > 0);
     DIR *dirp2;
     struct dirent *entry2;
@@ -75,7 +74,7 @@ int main() {
             }
         }
     }
-    
+    //soal b (make files according to the available name)
     int i;
     for(i = 0; i < idx; i++) {
         pid_t cid;

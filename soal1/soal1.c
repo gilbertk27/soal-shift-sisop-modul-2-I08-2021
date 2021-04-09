@@ -47,9 +47,12 @@ int x, tanggal, bulan, jam, menit, detik;
     int nMinute = timeNow -> tm_min;
     int nSecond = timeNow -> tm_sec;	
 
-        // Proses yang akan dijalankan pada tgl 9 April
-        // Karena soal a,b,c harus dijalankan 6 jam sebelum ultah stevany maka 22-6 = 16
+
+//FOR A-C
+// Proses yang akan dijalankan pada tgl 9 April
+// Karena soal a,b,c harus dijalankan 6 jam sebelum ultah stevany maka 22-6 = 16
 	
+	//For E & F (check time & date) 6 hour before birthday
 	 if((bDay == nDay) && (bMonth == nMonth) && (bMinute == nMinute) && (0 == nSecond))
 	 {
       	 if(bHour - 6 == nHour)
@@ -59,7 +62,7 @@ int x, tanggal, bulan, jam, menit, detik;
 	pid_t pid1 = fork();	
    	int status;
    	if (pid1 == 0) {
-		// 1a) membuat direktori 
+		// A) membuat direktori 
 		pid_t pid2 = fork();
 		if(pid2 == 0) {
   		      char *argv[] = {"mkdir", "-p", filename[0], filename[1], filename[2], NULL};
@@ -74,6 +77,7 @@ int x, tanggal, bulan, jam, menit, detik;
              
 	}
 	
+	// B) download zipfiles 
 	int status_1;
 	while(wait(&status_1) > 0);
 		pid_t pid_1 = fork();
@@ -105,7 +109,7 @@ int x, tanggal, bulan, jam, menit, detik;
 			execv("/usr/bin/wget", arg);
 		}
 		  
-		
+	// C) unzip zipfiles 		
 	int status_4;
 	while(wait(&status_4) > 0);
 		pid_t pid4 = fork();
@@ -136,11 +140,14 @@ int x, tanggal, bulan, jam, menit, detik;
 		}
 }	  
 	
-	
+//END A-C
+
+//FOR D-F
+	//For E & F (check time & date) at birthday time	
 	// Saat waktu menunjukkan ulang tahun stevany yaitu jam == 22 maka lakukan proses d, e, f
-	//if(tanggal==9 && bulan==4 && jam==22 && menit==22 && detik == 0){
 	if(bHour == nHour){   
 	
+	//D) Move item form zip to the assigned directory	
 	int status_7;
 	while(wait(&status_7) > 0);
 		pid_t pid7 = fork();
@@ -230,7 +237,7 @@ int x, tanggal, bulan, jam, menit, detik;
 	    		}
 		}
 		}
-		
+		//D) (bonus) remove initial folder from the unzip directory	
 		char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
          		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
          		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/";
@@ -244,7 +251,7 @@ int x, tanggal, bulan, jam, menit, detik;
 			}
             	
             	sleep(5);
-            	// E,F. Semua Folder akan di zip dan folder2nya akan dihapus
+            	// E,F) Semua Folder akan di zip dan folder2nya akan dihapus
         	int status_8;
         	while(wait(&status_8) > 0);
         	pid_t pid11;
@@ -259,7 +266,7 @@ int x, tanggal, bulan, jam, menit, detik;
             }
 
  }
-
+//END D-F
 }
 }
 
