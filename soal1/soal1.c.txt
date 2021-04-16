@@ -6,7 +6,7 @@
 
 int main() {
 	pid_t pid1 = fork();
-   	int musyik;
+   	int status;
    	if (pid1 == 0) {
 		// 1a) membuat direktori 
 		pid_t pid2 = fork();
