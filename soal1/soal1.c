@@ -11,18 +11,18 @@ int main() {
 		// 1a) membuat direktori 
 		pid_t pid2 = fork();
 		if(pid2 == 0) {
-       			char *argv[]={"mkdir","/Home/salma/modul2/Musyik",NULL};
+       		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
        			execv("/bin/mkdir",argv);
 		}
 		else {
 			sleep(5);
-        	        char *arg2[]={"mkdir","/Home/salma/modul2/Fylm",NULL};
+        	        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm",NULL};
                 	execv("/bin/mkdir",arg2);
 		}
 		}
 		else {
                         sleep(5);
-                        char *arg2[]={"mkdir","/Home/salma/modul2/Pyoto",NULL};
+                        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto",NULL};
                         execv("/bin/mkdir",arg2);
 
    	}
