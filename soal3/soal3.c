@@ -85,26 +85,6 @@ int status;
 
     	if (child == 0)
     	{ 
-    	char msg[80] = "Download Success", status_file[160], temp;
-    	for (int i = 0; i < strlen(msg); i++) {
-    	/*for caessar cipher */
-    	if (msg[i] >= 'A' && msg[i]<='Z') {
-        	char newletter = msg[i] - 'A' + 26;
-        	newletter += 5;
-        	newletter = newletter % 26;
-        	msg[i] = newletter + 'A';
-    	} else if (msg[i] >= 'a' && msg[i]<='z') {
-        	char newletter = msg[i] - 'a' + 26;
-        	newletter += 5;
-        	newletter = newletter % 26;
-        	msg[i] = newletter + 'a';
-    	}
-  	}
- 	sprintf(status_file, "%s/%s", name_folder, "status.txt");
- 	FILE *txt = fopen(status_file, "w");
- 	fputs(msg, txt);
- 	fclose(txt);
-
       		if (fork() == 0)
       		{
         		char *argv[] = {"mkdir", "-p", name_folder, NULL};
@@ -137,6 +117,27 @@ int status;
           	  		sleep(5);
               			}
         	    
+        	    
+        	    	char msg[80] = "Download Success", status_file[160], temp;
+    			for (int i = 0; i < strlen(msg); i++) {
+    			/*for caessar cipher */
+    			if (msg[i] >= 'A' && msg[i]<='Z') {
+        			char newletter = msg[i] - 'A' + 26;
+        			newletter += 5;
+        			newletter = newletter % 26;
+        			msg[i] = newletter + 'A';
+    			} else if (msg[i] >= 'a' && msg[i]<='z') {
+        			char newletter = msg[i] - 'a' + 26;
+        			newletter += 5;
+        			newletter = newletter % 26;
+			msg[i] = newletter + 'a';
+	    		}
+  			}
+ 			sprintf(status_file, "%s/%s", name_folder, "status.txt");
+ 			FILE *txt = fopen(status_file, "w");
+ 			fputs(msg, txt);
+ 			fclose(txt);
+ 
 			char name_folder_zip[150];
         		sprintf(name_folder_zip, "%s.zip", name_folder);
         		char *argv[] = {"zip", "-qrm", name_folder_zip, name_folder, NULL};
