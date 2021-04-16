@@ -11,7 +11,7 @@ int main() {
 		// 1a) membuat direktori 
 		pid_t pid2 = fork();
 		if(pid2 == 0) {
-       			char *argv[]={"mkdir","/Home/salma/modul2/Musyik", musyik ,NULL};
+       			char *argv[]={"mkdir","/Home/salma/modul2/Musyik",NULL};
        			execv("/bin/mkdir",argv);
 		}
 		else {
