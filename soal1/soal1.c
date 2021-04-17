@@ -8,7 +8,7 @@ int main() {
 	pid_t pid1 = fork();
    	int status;
    	if (pid1 == 0) {
-		// 1a) membuat direktori 
+		// 1a) create folder 
 		pid_t pid2 = fork();
 		if(pid2 == 0) {
        		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
@@ -32,7 +32,7 @@ else {
                 pid_t pid3 =  fork();
                 int status1;
                 if(pid3 == 0) {
-                        // 3b) extract file
+                        // 3c) extract file
                         char *arg[]={"unzip","-qq","/home/salma/modul2/Musik_for_Stevany.zip","-d","/home/salma/modul2",NULL};
                         execv("/usr/bin/unzip",arg);
                 }
