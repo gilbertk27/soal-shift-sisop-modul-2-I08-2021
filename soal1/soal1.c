@@ -14,36 +14,35 @@ int main() {
        		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
        			execv("/bin/mkdir",argv);
 		}
-		else {
+		else if(pid2 != 0) {
 			sleep(5);
         	        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm",NULL};
                 	execv("/bin/mkdir",arg2);
 		}
-		}
-		else {
+		else if (pid2 != 0){
                         sleep(5);
                         char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto",NULL};
                         execv("/bin/mkdir",arg2);
 
-   	}
-}
-else {
+   		}
+		}
+	else if (pid1 != 0) {
                 while ((wait(&status)) > 0);
                 pid_t pid3 =  fork();
                 int status1;
                 if(pid3 == 0) {
                         // 3b) extract file
-                        char *arg[]={"unzip","-qq","/home/salma/modul2/Musik_for_Stevany.zip","-d","/home/salma/modul2",NULL};
+                        char *arg[]={"unzip","-q","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musik_for_Stevany.zip","-d","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
                         execv("/usr/bin/unzip",arg);
                 }
-                else {
-                        char *arg[]={"unzip","-qq","/home/salma/modul2/Film_for_Stevany.zip","-d","/home/salma/modul2",NULL};
+                else if (pid3 != 0) {
+                        char *arg[]={"unzip","-q","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Film_for_Stevany.zip","-d","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm",NULL};
                         execv("/usr/bin/unzip",arg);
                 }
-                else {
-                        char *arg[]={"unzip","-qq","/home/salma/modul2/Foto_for_Stevany.zip","-d","/home/salma/modul2/",NULL};
+                else if (pid3 != 0) {
+                        char *arg[]={"unzip","-q","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Foto_for_Stevany.zip","-d","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto",NULL};
                         execv("/usr/bin/unzip",arg);
                 }
+	}
 }
-
 
