@@ -27,6 +27,14 @@
 	1. pid_t pid2 = fork() to create a new process
 	2. if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
 	3. sleep(5) The program first pauses for five seconds and creates a new folder
+#### 1 b. For music, he downloads it from the link below, so are the cases for films and photos.
+		...
+##### Explanation 1b
+	...
+#### 1 c. he didn’t want the folder to contain the zip files so he extracts the files first after downloading it.
+#### 1 d. moving it to the folder that has been made (only the files).
+#### 1 e. When it’s her birthday, all folder will be zipped with the name Lopyu_Stevany.zip and all the folders will be deleted. (Only the zip remains).
+#### 1 f. To make his life easier, he wants all of the above to run automatically 6 hours before her birthday (except for point e of course)
 ### NO. 2
 #### 2 a. First, the program needs to extract the given zip into the folder “/home/[user]/modul2/petshop”. Because Loba's boss is careless, the zip may contain unimportant folders, so the program must be able to distinguish between files and folders so that it can process files that should be worked on and delete unnecessary folders.
 #### 2 b. Pet photos need to be categorized based on the pet's species, so you will need to create a folder for each species that is in the zip file. Since you can't possibly check manually, the program needs to create the required folders according to the contents of the zip file.
