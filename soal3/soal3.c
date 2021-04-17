@@ -105,7 +105,6 @@ int status;
             				tm_t2 = localtime(&t2);
         
             				int t = (int)time(NULL);
-            				t = (t % 1000) + 100;
             
             				char picfile[100];
             				sprintf(picfile, "https://picsum.photos/%ld", ((t % 1000) + 100));
