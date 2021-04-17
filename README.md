@@ -25,5 +25,5 @@
                        
 ##### Explanation 1a
 **1** pid_t pid2 = fork() to create a new process
-**2** if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv).
+**2** if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
 **3** sleep(5) The program first pauses for five seconds and creates a new folder
