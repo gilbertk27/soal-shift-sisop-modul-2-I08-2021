@@ -7,7 +7,7 @@
 
 ### NO. 1
 #### 1 a. create folders named Musyik, Fylm, and Pyoto
-  pid_t pid2 = fork();
+  		pid_t pid2 = fork();
 		if(pid2 == 0) {
        		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
        			execv("/bin/mkdir",argv);
