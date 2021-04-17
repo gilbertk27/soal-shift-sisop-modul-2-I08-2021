@@ -27,4 +27,23 @@ int main() {
 
    	}
 }
+else {
+                while ((wait(&status)) > 0);
+                pid_t pid3 =  fork();
+                int status1;
+                if(pid3 == 0) {
+                        // 3b) extract file
+                        char *arg[]={"unzip","-qq","/home/salma/modul2/Musik_for_Stevany.zip","-d","/home/salma/modul2",NULL};
+                        execv("/usr/bin/unzip",arg);
+                }
+                else {
+                        char *arg[]={"unzip","-qq","/home/salma/modul2/Film_for_Stevany.zip","-d","/home/salma/modul2",NULL};
+                        execv("/usr/bin/unzip",arg);
+                }
+                else {
+                        char *arg[]={"unzip","-qq","/home/salma/modul2/Foto_for_Stevany.zip","-d","/home/salma/modul2/",NULL};
+                        execv("/usr/bin/unzip",arg);
+                }
+}
+
 
