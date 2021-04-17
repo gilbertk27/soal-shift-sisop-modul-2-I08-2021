@@ -24,3 +24,6 @@
                         execv("/bin/mkdir",arg2);
                        
 ##### Explanation 1a
+**-** pid_t pid2 = fork() to create a new process
+**-** if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv).
+**-** sleep(5) The program first pauses for five seconds and creates a new folder
