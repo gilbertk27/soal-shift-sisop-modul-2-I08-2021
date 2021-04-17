@@ -102,8 +102,8 @@ char *filename[3] = {"Pyoto","Musyik","Fylm"};
 		pid_t pid7 = fork();
 		if(pid7 < 0) exit(0);
 		if(pid7 == 0) {
-			char *arg[] = {"mv",  "-v", "/Pyoto/FOTO/*", "/Pyoto/",NULL};
-			execv("/usr/bin/mv", arg);
+			char *arg[] = {"cp",  "-r", "/Pyoto/FOTO/", "/Pyoto/",NULL};
+			execv("/usr/bin/cp", arg);
 		}
-*/
+	*/
 }
