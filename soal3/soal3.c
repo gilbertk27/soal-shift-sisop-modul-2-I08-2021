@@ -104,10 +104,14 @@ int status;
             				t2 = time(NULL);
             				tm_t2 = localtime(&t2);
         
-            				long int t = (int)time(NULL);
+
+            			
+            				int t = (int)time(NULL);
+            				t = (t % 1000) + 100;
+
             
             				char picfile[100];
-            				sprintf(picfile, "https://picsum.photos/%ld", ((t % 1000) + 100));
+            				sprintf(picfile, "https://picsum.photos/%d", t);
             				char filename[100];
            	  			strftime(filename, 100, "%Y-%m-%d_%H:%M:%S", tm_t2);
             				char *argv[] = {"wget", picfile, "-qO", filename, NULL};
