@@ -128,7 +128,10 @@ int status;
             			
             				int t = (int)time(NULL);
             				t = (t % 1000) + 100;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of e8c6fca (updated no 3)
             
             				char picfile[100];
             				sprintf(picfile, "https://picsum.photos/%d", t);
