@@ -9,30 +9,77 @@
 #### 1 a. Because she likes the letter Y so much, He wanted the name of the folder as Musyik for mp3, Fylm for mp4, and Pyoto for jpg
   		pid_t pid2 = fork();
 		if(pid2 == 0) {
-       		char *argv[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik",NULL};
-       			execv("/bin/mkdir",argv);
-		}
-		else {
-			sleep(5);
-        	        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm",NULL};
-                	execv("/bin/mkdir",arg2);
-		}
-		}
-		else {
-                        sleep(5);
-                        char *arg2[]={"mkdir","/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto",NULL};
-                        execv("/bin/mkdir",arg2);
+  		      char *argv[] = {"mkdir", "-p", filename[0], filename[1], filename[2], NULL};
+        	      execv("/bin/mkdir", argv);
+    		}
                        
 ##### Explanation 1a
 	1. pid_t pid2 = fork() to create a new process
 	2. if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
-	3. sleep(5) The program first pauses for five seconds and creates a new folder
+	3.
 #### 1 b. For music, he downloads it from the link below, so are the cases for films and photos.
-		...
+	int status_1;
+	while(wait(&status_1) > 0);
+		pid_t pid_1 = fork();
+		if(pid_1 < 0) exit(0);
+		if(pid_1 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp&export=download","-O" ,"Film_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+			
+		}
+		  
+			
+			
+	int status_2;
+	while(wait(&status_2) > 0);
+		pid_t pid_2 = fork();
+		if(pid_2 < 0) exit(0);
+		if(pid_2 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download","-O" ,"Musik_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+		}
+		  
+			
+	int status_3;
+	while(wait(&status_3) > 0);
+		pid_t pid_3 = fork();
+		if(pid_3 < 0) exit(0);
+		if(pid_3 == 0) {
+			char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL};
+			execv("/usr/bin/wget", arg);
+		}
 ##### Explanation 1b
 	...
 #### 1 c. he didn’t want the folder to contain the zip files so he extracts the files first after downloading it.
-		...
+	int status_4;
+	while(wait(&status_4) > 0);
+		pid_t pid4 = fork();
+		if(pid4 < 0) exit(0);
+		if(pid4 == 0) {
+			char *arg[] = {"unzip", "-q", "Musik_for_Stevany.zip","-d","Musyik", NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+		  
+		
+	int status_5;
+	while(wait(&status_5) > 0);
+		pid_t pid5 = fork();
+		if(pid5 < 0) exit(0);
+		if(pid5 == 0) {
+			char *arg[] = {"unzip", "-q", "Film_for_Stevany.zip","-d","Fylm", NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+		  
+
+	int status_6;
+	while(wait(&status_6) > 0);
+		pid_t pid6 = fork();
+		if(pid6 < 0) exit(0);
+		if(pid6 == 0) {
+			char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL};
+			execv("/usr/bin/unzip", arg);
+		}
+}	  
 ##### Explanation 1c
 	...
 #### 1 d. moving it to the folder that has been made (only the files).
