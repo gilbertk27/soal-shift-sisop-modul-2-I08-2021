@@ -20,10 +20,46 @@ char *links[3] = {
         "https://drive.google.com/uc?id=1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp&export=download"
     };
 
+
 char *zipname[3] = {"Foto_for_Stevany.zip","Musik_for_Stevany.zip","Film_for_Stevany.zip"};
 char *filename[3] = {"Pyoto","Musyik","Fylm"};
 
-	pid_t pid1 = fork();
+/*	
+int x, tanggal, bulan, jam, menit, detik;
+  	time_t T= time(NULL);
+        struct  tm tm = *localtime(&T);
+
+
+	time_t times = time(NULL);
+    struct tm *timeNow = localtime(&times);
+    
+    int bDay = 23;
+  int bMonth = 4;
+  int bHour = 23;
+  int bMinute = 39;
+    int nDay = timeNow -> tm_mday;
+    int nMonth = timeNow -> tm_mon + 1;
+    int nHour = timeNow -> tm_hour;
+    int nMinute = timeNow -> tm_min;
+    int nSecond = timeNow -> tm_sec;	
+	
+        tanggal = tm.tm_mday;
+        bulan = tm.tm_mon + 1;
+        jam = tm.tm_hour;
+        menit = tm.tm_min;
+        detik = tm.tm_sec;
+
+while(1){
+        // Proses yang akan dijalankan pada tgl 9 April
+        // Karena soal a,b,c harus dijalankan 6 jam sebelum ultah stevany maka 22-6 = 16
+	
+	 if((bDay == nDay) && (bMonth == nMonth) && (bMinute == nMinute) && (0 == nSecond))
+	 {
+      	 if(bHour - 6 == nHour)
+         {
+*/     
+         
+	pid_t pid1 = fork();	
    	int status;
    	if (pid1 == 0) {
 		// 1a) membuat direktori 
@@ -101,25 +137,29 @@ char *filename[3] = {"Pyoto","Musyik","Fylm"};
 			char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL};
 			execv("/usr/bin/unzip", arg);
 		}
-		  
-		
-	/* tried to move not working */
+//}	  
+	
+	
+	// Saat waktu menunjukkan ulang tahun stevany yaitu jam == 22 maka lakukan proses d, e, f
+	//if(tanggal==9 && bulan==4 && jam==22 && menit==22 && detik == 0){
+//	if(bHour == nHour){   
 	
 	int status_7;
 	while(wait(&status_7) > 0);
 		pid_t pid7 = fork();
+		if (pid7 < 0) exit(0);
 		if (pid7 == 0) {                 
     			DIR *folder1;
     			DIR *folder2;
     			DIR *folder3;
     			struct dirent *entry;
     			int files = 0;
-
-    			char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
+			
+			char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
     			dir2[255],
          		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
          		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/";
-
+    			
    			folder1 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/");
    			folder2 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/");
    			folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/");
@@ -192,5 +232,34 @@ char *filename[3] = {"Pyoto","Musyik","Fylm"};
         		}
 	    		}
 		}
-	}
-}
+		}
+		
+		char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
+         		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
+         		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/";
+		int status_9;
+			while(wait(&status_9) > 0);
+			pid_t pid12 = fork();
+			if(pid12 < 0) exit(0);
+			if(pid12 == 0) {
+			char *arg[] = {"rm","-r",dir,dir3,dir4,NULL};
+			execv("/usr/bin/rm", arg);
+			}
+            	
+            	sleep(5);
+            	// E,F. Semua Folder akan di zip dan folder2nya akan dihapus
+        	int status_8;
+        	while(wait(&status_8) > 0);
+        	pid_t pid11;
+        	pid11 = fork();
+        	if (pid11 < 0) exit(0);
+            	if (pid11 == 0) 
+           	{
+                // Memasukkan 3 folder kedalam zip dan langsung menghapus foldernya.
+               char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
+               execv("/bin/zip", argv);
+            	}
+            }
+// }
+//}
+//}
