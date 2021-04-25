@@ -423,18 +423,17 @@
             execv("/bin/mkdir", arg);
         }
     } -> To create folders according to the type of pet.
-#### 2 c. After the folders are created, your program should move the photos to the folder based on their respective species and rename the photo with the pet's name.
-		...
-##### Explanation 2c
-	...
-#### 2 d. Because 1 photo may have more than 1 pet in it, photos must be moved to each corresponding category.
-		...
-##### Explanation 2d
-	...
-#### 2 e. In each folder, create a file "keterangan.txt" that contains names and ages of all the pets in the folder. Format of "keterangan.txt" must be identical with the 
-		...
-##### Explanation 2e
-	...
+    
+##### Problem encountered
+	• don't know the appropriate function & library to solve the problem
+	• placement of the variable that won't be read based on the placement (inside child process or not)
+
+#### Result Image:
+| ![](/img/2.png) | 
+|:--:| 
+| *2a & 2b result* |
+
+
 ### NO. 3
 #### 3 a. Ranora must create a C program which every 40 seconds creates a directory with a name according to the timestamp [YYYY-mm-dd_HH:ii:ss].
 		...
@@ -453,6 +452,41 @@
 ##### Explanation 3d
 	...
 #### 3 e. The Ranora apprentice supervisor also wants the main program created by Ranora to run in two modes. To activate the first mode, the program must be executed with the -z argument, and when it is executed in the first mode, the main program will immediately execute all its operations when the Killer program is run. Meanwhile, to activate the second mode, the program must be run with the -x argument, and when run in the second mode, the main program will stop allowing the processes in each directory that are still running until it is finished (The directory that has been created will download the image to completion and create a txt file, then zip and delete the directory).
-		...
+		void killfile(char mode[])
+{
+FILE *kill_file;
+kill_file = fopen("killer.sh", "w");
+fprintf(kill_file,"rm $0\n");
+if(strcmp(mode, "-z")==0) 
+	fprintf(kill_file, "#!/bin/bash\nkill -9 -%d", getpid());
+else if(strcmp(mode, "-x")==0) 
+	fprintf(kill_file, "#!/bin/bash\nkill %d", getpid());
+    
+int status;
+pid_t child_id;
+child_id = fork();
+if(child_id==0)
+{ 
+        char *argv[] = {"chmod", "u+x", "killer.sh", NULL};
+        execv("/bin/chmod", argv);
+}
+
+fclose(kill_file);
+}
 ##### Explanation 3e
 	...
+		
+##### Problem encountered
+	• don't know the appropriate function & library to solve the problem
+	• placement of the variable that won't be read based on the placement (inside child process or not)
+
+#### Result Image:
+| ![](/img/soal3/3-x1.png) | 
+| ![](/img/soal3/3-x2.png) | 
+|:--:| 
+| *Result using -x mode (program will be stopped until all process ended* |
+
+| ![](/img/soal3/3-z1.png) | 
+| ![](/img/soal3/3-z2.png) | 
+|:--:| 
+| *Result using -z mode (program will be stopped immediately* |
