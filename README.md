@@ -366,7 +366,48 @@
         }
     }
 ##### Explanation 2b
-	...
+	1. while(wait(&status2) > 0);
+    DIR *dirp2;
+    struct dirent *entry2;
+    dirp2 = opendir("/home/xyncz/modul2/petshop");
+    char foldername[400][400];
+    int idx = 0;
+    while((entry2 = readdir(dirp2)) != NULL) {
+        if(entry2->d_type == DT_REG) {
+            char tmp[400], tmp2[400];
+            memset(foldername[idx], 0, sizeof(foldername[idx]));
+            memset(tmp2, 0, sizeof(tmp2));
+            strcpy(tmp, entry2->d_name);
+            
+            int i, found = 0;
+            for(i = 0; i < strlen(tmp); i++) {
+                if(tmp[i] == ';') break;
+                tmp2[i] = tmp[i];
+            }
+            
+            for(i = 0; i < idx && found == 0; i++)
+                if(strcmp(foldername[i], tmp2) == 0)
+                    found = 1;
+            
+            if(found == 0) {
+                strcpy(foldername[idx], tmp2);
+                idx++;
+            }
+        }
+    } -> 	Before creating a pet categorization folder, it is necessary to know the types of pets which will later be used as the name of the folder that will be created. Pet types are stored in a 2-dimensional array of char (such as an array of strings in C ++) with the variable name foldername [] [] and the integer idx to aid indexing of the foldername.
+    
+    2. int i;
+    for(i = 0; i < idx; i++) {
+        pid_t cid;
+        cid = fork();
+        if(cid < 0) exit(0);
+        if(cid == 0) {
+            char tmp[400];
+            sprintf(tmp, "/home/xyncz/modul2/petshop/%s", foldername[i]);
+            char *arg[] = {"mkdir", tmp, NULL};
+            execv("/bin/mkdir", arg);
+        }
+    } -> To create folders according to the type of pet.
 #### 2 c. After the folders are created, your program should move the photos to the folder based on their respective species and rename the photo with the pet's name.
 		...
 ##### Explanation 2c
