@@ -482,12 +482,14 @@
 	• placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
-| ![](/img/soal3/3-x1.png) |
+#### Result Image:
+| *Result using -x mode (program will be stopped until all process ended* |
 |:--:| 
 | ![](/img/soal3/3-x2.png) | 
-|:--:| 
-| *Result using -x mode (program will be stopped until all process ended* |
+| ![](/img/soal3/3-x1.png) |
 
-| ![](/img/soal3/3-z1.png) | ![](/img/soal3/3-z2.png) | 
-|:--:| 
 | *Result using -z mode (program will be stopped immediately* |
+|:--:| 
+| ![](/img/soal3/3-z1.png) | 
+| ![](/img/soal3/3-z2.png) | 
+
