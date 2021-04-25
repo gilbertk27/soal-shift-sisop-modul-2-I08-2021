@@ -452,27 +452,28 @@
 ##### Explanation 3d
 	...
 #### 3 e. The Ranora apprentice supervisor also wants the main program created by Ranora to run in two modes. To activate the first mode, the program must be executed with the -z argument, and when it is executed in the first mode, the main program will immediately execute all its operations when the Killer program is run. Meanwhile, to activate the second mode, the program must be run with the -x argument, and when run in the second mode, the main program will stop allowing the processes in each directory that are still running until it is finished (The directory that has been created will download the image to completion and create a txt file, then zip and delete the directory).
-		void killfile(char mode[])
-{
-FILE *kill_file;
-kill_file = fopen("killer.sh", "w");
-fprintf(kill_file,"rm $0\n");
-if(strcmp(mode, "-z")==0) 
-	fprintf(kill_file, "#!/bin/bash\nkill -9 -%d", getpid());
-else if(strcmp(mode, "-x")==0) 
-	fprintf(kill_file, "#!/bin/bash\nkill %d", getpid());
-    
-int status;
-pid_t child_id;
-child_id = fork();
-if(child_id==0)
-{ 
-        char *argv[] = {"chmod", "u+x", "killer.sh", NULL};
-        execv("/bin/chmod", argv);
-}
 
-fclose(kill_file);
-}
+	void killfile(char mode[])
+	{
+	FILE *kill_file;
+	kill_file = fopen("killer.sh", "w");
+	fprintf(kill_file,"rm $0\n");
+	if(strcmp(mode, "-z")==0) 
+		fprintf(kill_file, "#!/bin/bash\nkill -9 -%d", getpid());
+	else if(strcmp(mode, "-x")==0) 
+		fprintf(kill_file, "#!/bin/bash\nkill %d", getpid());
+    
+	int status;
+	pid_t child_id;
+	child_id = fork();
+	if(child_id==0)
+	{ 
+        	char *argv[] = {"chmod", "u+x", "killer.sh", NULL};
+        	execv("/bin/chmod", argv);
+	}
+	fclose(kill_file);
+	}
+
 ##### Explanation 3e
 	...
 		
@@ -481,12 +482,10 @@ fclose(kill_file);
 	• placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
-| ![](/img/soal3/3-x1.png) | 
-| ![](/img/soal3/3-x2.png) | 
+| ![](/img/soal3/3-x1.png) | ![](/img/soal3/3-x2.png) | 
 |:--:| 
 | *Result using -x mode (program will be stopped until all process ended* |
 
-| ![](/img/soal3/3-z1.png) | 
-| ![](/img/soal3/3-z2.png) | 
+| ![](/img/soal3/3-z1.png) | ![](/img/soal3/3-z2.png) | 
 |:--:| 
 | *Result using -z mode (program will be stopped immediately* |
