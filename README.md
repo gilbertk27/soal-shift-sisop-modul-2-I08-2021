@@ -269,8 +269,8 @@
 5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
 
 ##### Problem encountered
-	• don't know the appropriate function & library to solve the problem
-	• placement of the variable that won't be read based on the placement (inside child process or not)
+- don't know the appropriate function & library to solve the problem
+- placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
 | ![](/img/1-1.png) | 
@@ -425,8 +425,9 @@
     } -> To create folders according to the type of pet.
     
 ##### Problem encountered
-	• don't know the appropriate function & library to solve the problem
-	• placement of the variable that won't be read based on the placement (inside child process or not)
+- lack of knowledge to do the problem so the time ran out to read refferences.
+- don't know the appropriate function & library to solve the problem
+- placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
 | ![](/img/2.png) | 
@@ -436,23 +437,122 @@
 
 ### NO. 3
 #### 3 a. Ranora must create a C program which every 40 seconds creates a directory with a name according to the timestamp [YYYY-mm-dd_HH:ii:ss].
-		...
+
 ##### Explanation 3a
-	...
+```		
+while(1)
+{
+t1 = time(NULL);
+tm_t1 = localtime(&t1);
+char name_folder[100];
+strftime(name_folder, 100, "%Y-%m-%d_%H:%M:%S", tm_t1);
+
+pid_t child;
+child = fork();
+
+int status;
+
+	if (child < 0) 
+      	exit(EXIT_FAILURE);
+
+    	if (child == 0)
+    	{ 
+      		if (fork() == 0)
+      		{
+        		char *argv[] = {"mkdir", "-p", name_folder, NULL};
+        		execv("/bin/mkdir", argv);
+      		}
+```
+- `strftime(name_folder, 100, "%Y-%m-%d_%H:%M:%S", tm_t)` to input format year-month-day hour:minute:second into string name_folder
+- `char *argv[] = {"mkdir", "-p", name_folder, NULL};` process to make new directory
+- `execv("/bin/mkdir", argv);` merupakan path `mkdir` to run the previous process
+
 #### 3 b. Each directory is filled with 10 images downloaded from https://picsum.photos/, where each image will be downloaded every 5 seconds. Each downloaded image will be named with a timestamp format [YYYY-mm-dd_HH:ii:ss] and the image is square with the size (n% 1000) + 50 pixels where n is the Unix Epoch time.
-		...
+		
 ##### Explanation 3b
-	...
+```
+else 
+	while ((wait(&status)) > 0);
+        		for (int i = 0; i < 10; i++)
+        		{
+          			if (fork() == 0)
+          			{
+            				chdir(name_folder);
+            				time_t t2;
+            				struct tm* tm_t2;
+        
+            				t2 = time(NULL);
+            				tm_t2 = localtime(&t2);
+        
+            				int t = (int)time(NULL);
+            				t = (t % 1000) + 100;
+            
+            				char picfile[100];
+            				sprintf(picfile, "https://picsum.photos/%d", ((t % 1000) + 50));
+            				char filename[100];
+           	  			strftime(filename, 100, "%Y-%m-%d_%H:%M:%S", tm_t2);
+            				char *argv[] = {"wget", picfile, "-qO", filename, NULL};
+            				execv("/usr/bin/wget", argv);
+          	  			}
+          	  		sleep(5);
+              			}
+```
+- `chdir(name_folder);` to change directory
+- `sprintf(picfile, "https://picsum.photos/%d", t);` to print the string of the downloaded pictures
+- `strftime(filename, 100, "%Y-%m-%d_%H:%M:%S", tm_t2);` to input the year-month-day hour:minute:second format to the string filename
+- `char *argv[] = {"wget", picfile, "-qO", filename, NULL};` to download picture files from the link
+- `execv("/usr/bin/wget", argv);` which is a `wget` path so that the previous process can run
+- `sleep(5);` sleep command so that there's 5 second delay before continuing to the next process 
+        	            	    
 #### 3 c. After the directory has been filled with 10 images, the program will create a file "status.txt", which contains the message "Download Success" which is encrypted with the Caesar Cipher technique and with shift 5. Caesar Cipher is a simple encryption technique which can perform encryption. string according to the shift / key that we specify. For example, the letter "A" will be encrypted with shift 4 it will become "E". Because Ranora is a perfectionist and neat person, he wants after the file is created, the directory will be zipped and the directory will be deleted, leaving only the zip file.
-		...
+		
 ##### Explanation 3c
-	...
+```
+	        	char msg[80] = "Download Success", status_file[160], temp;
+    			for (int i = 0; i < strlen(msg); i++) {
+    			/*for caessar cipher */
+    			if (msg[i] >= 'A' && msg[i]<='Z') {
+        			char newletter = msg[i] - 'A' + 26;
+        			newletter += 5;
+        			newletter = newletter % 26;
+        			msg[i] = newletter + 'A';
+    			} else if (msg[i] >= 'a' && msg[i]<='z') {
+        			char newletter = msg[i] - 'a' + 26;
+        			newletter += 5;
+        			newletter = newletter % 26;
+			msg[i] = newletter + 'a';
+	    		}
+  			}
+ 			sprintf(status_file, "%s/%s", name_folder, "status.txt");
+ 			FILE *txt = fopen(status_file, "w");
+ 			fputs(msg, txt);
+ 			fclose(txt);
+ 
+			char name_folder_zip[150];
+        		sprintf(name_folder_zip, "%s.zip", name_folder);
+        		char *argv[] = {"zip", "-qrm", name_folder_zip, name_folder, NULL};
+        		execv("/usr/bin/zip", argv);
+      		  }
+    	}
+    	else
+      	sleep(40);
+  	}
+```
+- `msg` variable to save the encrypted "Download Success" and `status_file` variable to save the encryption result from Caesar Cipher.
+- `sprintf(status_file, "%s/%s", name_folder, "status.txt");` to write string with format `name_folder/status.txt` to status_file variable.
+- `FILE *txt = fopen(status_file, "w");` txt as the pointer to the file location & fopen to open file, and using `w` command to create new file and do the writing process.
+- `fputs(msg, txt);` to save string messages into the txt.
+- `fclose(txt);` to close the connection from txt.
+- `sprintf(foldernamezip, "%s.zip", foldername);` to print the string on the zip folder.
+- `char *argv[] = {"zip", "-qrm", foldernamezip, foldername, NULL};` to zip the folder which contaion pictures that have been downloaded.
+- `execv("/usr/bin/zip", argv);` which is `zip` path so that the previous process can run.
+
 #### 3 d. To make it easier to control the program, the Ranora apprentice supervisor wants the program to produce an executable "Killer" program, where the program will terminate all running program processes and will run itself after the program is run. Because Ranora is interested in something new, Ranora has an idea for the "Killer" program that was made, it must be a bash program.
-		...
-##### Explanation 3d
-	...
+
 #### 3 e. The Ranora apprentice supervisor also wants the main program created by Ranora to run in two modes. To activate the first mode, the program must be executed with the -z argument, and when it is executed in the first mode, the main program will immediately execute all its operations when the Killer program is run. Meanwhile, to activate the second mode, the program must be run with the -x argument, and when run in the second mode, the main program will stop allowing the processes in each directory that are still running until it is finished (The directory that has been created will download the image to completion and create a txt file, then zip and delete the directory).
 
+- To create the killer process :
+```	
 	void killfile(char mode[])
 	{
 	FILE *kill_file;
@@ -462,7 +562,9 @@
 		fprintf(kill_file, "#!/bin/bash\nkill -9 -%d", getpid());
 	else if(strcmp(mode, "-x")==0) 
 		fprintf(kill_file, "#!/bin/bash\nkill %d", getpid());
-    
+```
+- To run the killer process: 
+```
 	int status;
 	pid_t child_id;
 	child_id = fork();
@@ -473,22 +575,24 @@
 	}
 	fclose(kill_file);
 	}
+```
 
-##### Explanation 3e
-	...
+##### Explanation 3d & 3e
+-	To solve the question d & e, we use strcmp so that we can know the input whenever it's -z mode or -x mode during the creation of killer bash program. If the input is -x, the process will be killed one by one so that after the process done, the program will be stopped. And for the -z mode, we will kill all the process immediately.
 		
 ##### Problem encountered
-	• don't know the appropriate function & library to solve the problem
-	• placement of the variable that won't be read based on the placement (inside child process or not)
+- Don't know the appropriate function & library to solve the problem
+- Placement of the variable that won't be read based on the placement (inside child process or not)
+- Not really understand the Caesar Cipher algorith and need to find source code in the internet
+- Don't know how to set the pixel size from https://picsum.photos/
 
 #### Result Image:
-#### Result Image:
-| *Result using -x mode (program will be stopped until all process ended* |
+| *Result using -x mode (program will be stopped until all process ended)* |
 |:--:| 
 | ![](/img/soal3/3x1.png) | 
 | ![](/img/soal3/3x2.png) |
 
-| *Result using -z mode (program will be stopped immediately* |
+| *Result using -z mode (program will be stopped immediately)* |
 |:--:| 
 | ![](/img/soal3/3-z1.png) | 
 | ![](/img/soal3/3-z2.png) | 
