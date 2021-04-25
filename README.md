@@ -102,6 +102,88 @@
    			folder1 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/");
    			folder2 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/");
    			folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/");
+                    
+    			if(folder1 == NULL) {
+        			perror("Unable to read directory");
+        			return(1);
+    			}
+                                
+    			while( (entry=readdir(folder1))) {
+                        
+        		files++;
+       	 	printf("File %3d: | Name : %s\n", files, entry->d_name);
+
+		        if (!strcmp (entry->d_name, "."))
+         		   continue;
+      		 	if (!strcmp (entry->d_name, ".."))    
+            		   continue;
+            		strcpy(dir2,dir);
+        		strcat(dir2,entry->d_name);
+        		
+        		pid_t pid8 = fork();
+        		
+        		if (pid8 < 0) exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+
+		        if (pid8 == 0 && entry->d_type == 8) {
+ 		           char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/", NULL};
+ 		           execv("/bin/mv", argv);
+		        }
+        		
+        		while( (entry=readdir(folder2))) {
+                        
+        		files++;
+       	 	printf("File %3d: | Name : %s\n", files, entry->d_name);
+
+		        if (!strcmp (entry->d_name, "."))
+         		   continue;
+      		 	if (!strcmp (entry->d_name, ".."))    
+            		   continue;
+            		strcpy(dir2,dir3);
+        		strcat(dir2,entry->d_name);
+
+        		pid_t pid9;
+        		pid9 = fork();
+                                    
+		        if (pid9 == 0) {
+            		    char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/", NULL};
+                           execv("/bin/mv", argv);
+        		}
+	    		}
+	    		
+	    		while( (entry=readdir(folder3))) {
+                        
+        		files++;
+       	 	printf("File %3d: | Name : %s\n", files, entry->d_name);
+
+		        if (!strcmp (entry->d_name, "."))
+         		   continue;
+      		 	if (!strcmp (entry->d_name, ".."))    
+            		   continue;
+            		strcpy(dir2,dir4);
+        		strcat(dir2,entry->d_name);
+
+        		pid_t pid10;
+        		pid10 = fork();
+                                    
+		        if (pid10 == 0) {
+            		    char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/", NULL};
+                           execv("/bin/mv", argv);
+        		}
+	    		}
+		}
+		}
+		// remove initial folder from the unzip directory	
+		char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
+         		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
+         		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/";
+		int status_9;
+			while(wait(&status_9) > 0);
+			pid_t pid12 = fork();
+			if(pid12 < 0) exit(0);
+			if(pid12 == 0) {
+			char *arg[] = {"rm","-r",dir,dir3,dir4,NULL};
+			execv("/usr/bin/rm", arg);
+			}
 
 ##### Explanation 1d
 	...
@@ -118,28 +200,15 @@
 ##### Explanation 1e
 	...
 #### 1 f. To make his life easier, he wants all of the above to run automatically 6 hours before her birthday (except for point e of course)
-	while(1){
-int x, tanggal, bulan, jam, menit, detik;
-  	time_t T= time(NULL);
-        struct  tm tm = *localtime(&T);
-
-	time_t times = time(NULL);
-    struct tm *timeNow = localtime(&times);
-    
-    int bDay = 9;	
-    int bMonth = 4;
-    int bHour = 22;
-    int bMinute = 22;
-    int nDay = timeNow -> tm_mday;
-    int nMonth = timeNow -> tm_mon + 1;
-    int nHour = timeNow -> tm_hour;
-    int nMinute = timeNow -> tm_min;
-    int nSecond = timeNow -> tm_sec;
-    
-	if((bDay == nDay) && (bMonth == nMonth) && (bMinute == nMinute) && (0 == nSecond))
-	 {
-      	 if(bHour - 6 == nHour)
-         {
+	int status_8;
+        	while(wait(&status_8) > 0);
+        	pid_t pid11;
+        	pid11 = fork();
+        	if (pid11 < 0) exit(0);
+            	if (pid11 == 0) 
+           	{
+	char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
+               execv("/bin/zip", argv);
 ##### Explanation 1f
 	...
 ### NO. 2
