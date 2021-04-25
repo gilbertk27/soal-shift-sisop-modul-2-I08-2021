@@ -220,9 +220,21 @@
 	8. folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"); to open the musik folder and return a pointer of type DIR.
 	9. char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
     			dir2[255],
-         		dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
-         		dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"; initialization array dir2 which holds the path of the foto folder, array initialization dir3 to contain the path of the file / directory to be moved from the film folder, and initialization of the array dir4 which holds the path of the musik folder.
-	10. 
+         dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
+         dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"; initialization array dir2 which holds the path of the foto folder, array initialization dir3 to contain the path of the file / directory to be moved from the film folder, and initialization of the array dir4 which holds the path of the musik folder.
+	10. while ((entry = readdir (folder1))) is used to list all files / directories in the foto folder.
+	11. while ((entry = readdir (folder2))) is used to list all files / directories in the film folder.
+	12. while ((entry = readdir (folder3))) is used to list all files / directories in the musik folder.
+	13. The file type can be found by entry-> d_type where 4 indicates a file and 8 indicates a directory. The name of the file can be found by entry-> d_name.
+	14. if (!strcmp (entry->d_name, ".")) and if (!strcmp (entry->d_name, "..")) In order for the directory "." and ".." does not include directories that are moved in the foto, film, musik folder
+	15. strcpy (dir2, dir) To save the path of a file 
+	16. strcpy (dir2, dir3) To save the path of a file 
+	17. strcpy (dir2, dir4) To save the path of a file  
+	18. strcat (dir2, entry-> d_name) which appends the filename / directory to the dir2 array.
+	19. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/", NULL}; to move files into folder pyoto
+	20. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/", NULL}; to move files into folder fylm
+	21. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/", NULL}; to move files into musyik
+	22. 
 #### 1 e. When it’s her birthday, all folder will be zipped with the name Lopyu_Stevany.zip and all the folders will be deleted. (Only the zip remains).
 	int status_8;
         	while(wait(&status_8) > 0);
