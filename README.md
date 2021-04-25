@@ -297,7 +297,30 @@
         int status2;
     }
 ##### Explanation 2a
-	...
+	1. 	pid_t cid;
+    cid = fork();
+    if(cid < 0) exit(0);
+    if(cid == 0) {
+    char *arg[] = {"unzip", "-o", "-q", "/home/xyncz/modul2/pets.zip", "-d", "/home/xyncz/modul2/petshop", NULL};
+    execv("/usr/bin/unzip", arg); -> In this case we are asked to extract the zip given to the folder "/ home / [user] / modul2 / petshop" using fork and execv.
+    
+    	2. while(wait(&status) > 0);
+    DIR *dirp;
+    struct dirent *entry;
+    dirp = opendir("/home/xyncz/modul2/petshop");
+    while((entry = readdir(dirp)) != NULL) {
+        if((entry->d_type == DT_DIR) && strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            pid_t cid;
+            cid = fork();
+            if(cid < 0) exit(0);
+            if(cid == 0) {
+                char foldername[400];
+                sprintf(foldername, "/home/xyncz/modul2/petshop/%s", entry->d_name);
+                char *arg[] = {"rm", "-r", foldername, NULL};
+                execv("/bin/rm", arg);
+            }
+        }
+        int status2; ->  Furthermore, with the following program, we can differentiate files and folders so that it can process files that should be worked on and delete unneeded folders. The wait () function is also used to wait for the unzipping process to finish first.
 #### 2 b. Pet photos need to be categorized based on the pet's species, so you will need to create a folder for each species that is in the zip file. Since you can't possibly check manually, the program needs to create the required folders according to the contents of the zip file.
 		
     while(wait(&status2) > 0);
