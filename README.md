@@ -14,9 +14,9 @@
     	}
                        
 ##### Explanation 1a
-	1. pid_t pid2 = fork() to create a new process
-	2. if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
-	3. char *argv[] = {"mkdir", "-p", filename[0], filename[1], filename[2], NULL}; To create a new folder
+1. pid_t pid2 = fork() to create a new process
+2. if (pid 2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv ("/ bin / mkdir", argv)
+3. char *argv[] = {"mkdir", "-p", filename[0], filename[1], filename[2], NULL}; To create a new folder
 #### 1 b. For music, he downloads it from the link below, so are the cases for films and photos.
 	int status_1;
 	while(wait(&status_1) > 0);
@@ -48,18 +48,18 @@
 			execv("/usr/bin/wget", arg);
 		}
 ##### Explanation 1b
-	1. while(wait(&status_1) > 0); waiting for the child process to finish doing its job (create a folder). After that, the program will create a second child process.
-	2. pid_t pid_1 = fork(); to create a new process
-	3. if(pid_2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
-	4. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Foto_for_Stevany.zip
-	5. while(wait(&status_2) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	6. pid_t pid_2 = fork(); to create a new process
-	7. if(pid_2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
-	8. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download","-O" ,"Musik_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Musik_for_Stevany.zip
-	9. while(wait(&status_3) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	10. pid_t pid_3 = fork(); to create a new process 
-	11. if(pid_3 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
-	12. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Foto_for_Stevany.zip
+1. while(wait(&status_1) > 0); waiting for the child process to finish doing its job (create a folder). After that, the program will create a second child process.
+2. pid_t pid_1 = fork(); to create a new process
+3. if(pid_2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
+4. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Foto_for_Stevany.zip
+5. while(wait(&status_2) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+6. pid_t pid_2 = fork(); to create a new process
+7. if(pid_2 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
+8. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download","-O" ,"Musik_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Musik_for_Stevany.zip
+9. while(wait(&status_3) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+10. pid_t pid_3 = fork(); to create a new process 
+11. if(pid_3 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/wget", arg);
+12. char *arg[] = {"Wget", "--no-check-certificate","https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download","-O" ,"Foto_for_Stevany.zip","done", NULL}; to download the zip file at the link and give it the name Foto_for_Stevany.zip
 #### 1 c. he didn’t want the folder to contain the zip files so he extracts the files first after downloading it.
 	int status_4;
 	while(wait(&status_4) > 0);
@@ -91,21 +91,21 @@
 		}
 }	  
 ##### Explanation 1c
-	1. while(wait(&status_4) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	2. pid_t pid4 = fork(); to create a new process 
-	3. if(pid4 < 0) exit(0);
-	4. if(pid4 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg);  
-	5. char *arg[] = {"unzip", "-q", "Musik_for_Stevany.zip","-d","Musyik", NULL}; to extract the Musik_for_Stevany.zip file
-	6. while(wait(&status_5) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	7. pid_t pid5 = fork(); to create a new process
-	8. if(pid5 < 0) exit(0);
-	9. if(pid5 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg); 
-	10. char *arg[] = {"unzip", "-q", "Film_for_Stevany.zip","-d","Fylm", NULL}; to extract the Film_for_Stevany.zip file
-	11. while(wait(&status_6) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	12. pid_t pid6 = fork(); to create a new process
-	13. if(pid6 < 0) exit(0);
-	14. if(pid6 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg); 
-	15. char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL}; to extract the Foto_for_Stevany.zip file
+1. while(wait(&status_4) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+2. pid_t pid4 = fork(); to create a new process 
+3. if(pid4 < 0) exit(0);
+4. if(pid4 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg);  
+5. char *arg[] = {"unzip", "-q", "Musik_for_Stevany.zip","-d","Musyik", NULL}; to extract the Musik_for_Stevany.zip file
+6. while(wait(&status_5) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+7. pid_t pid5 = fork(); to create a new process
+8. if(pid5 < 0) exit(0);
+9. if(pid5 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg); 
+10. char *arg[] = {"unzip", "-q", "Film_for_Stevany.zip","-d","Fylm", NULL}; to extract the Film_for_Stevany.zip file
+11. while(wait(&status_6) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+12. pid_t pid6 = fork(); to create a new process
+13. if(pid6 < 0) exit(0);
+14. if(pid6 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/unzip", arg); 
+15. char *arg[] = {"unzip", "-q", "Foto_for_Stevany.zip","-d","Pyoto",NULL}; to extract the Foto_for_Stevany.zip file
 #### 1 d. moving it to the folder that has been made (only the files).
 	int status_7;
 	while(wait(&status_7) > 0);
@@ -210,31 +210,31 @@
 			}
 
 ##### Explanation 1d
-	1. DIR *folder1; holds the DIR type pointer.
-	2. DIR *folder2; holds the DIR type pointer.
-	3. DIR *folder3; holds the DIR type pointer.
-	4. struct dirent *entry; is a pointer to a directory entry.
-	5. int files = 0 initializes the files variable to count the number of files / folders contained in a folder.
-	6. folder1 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/"); to open the foto folder and return a pointer of type DIR.
-	7. folder2 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/"); to open the film folder and return a pointer of type DIR.
-	8. folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"); to open the musik folder and return a pointer of type DIR.
-	9. char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
+1. DIR *folder1; holds the DIR type pointer.
+2. DIR *folder2; holds the DIR type pointer.
+3. DIR *folder3; holds the DIR type pointer.
+4. struct dirent *entry; is a pointer to a directory entry.
+5. int files = 0 initializes the files variable to count the number of files / folders contained in a folder.
+6. folder1 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/"); to open the foto folder and return a pointer of type DIR.
+7. folder2 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/"); to open the film folder and return a pointer of type DIR.
+8. folder3 = opendir("/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"); to open the musik folder and return a pointer of type DIR.
+9. char dir[255] = "/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/FOTO/", 
     			dir2[255],
-         dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
-         dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"; initialization array dir2 which holds the path of the foto folder, array initialization dir3 to contain the path of the file / directory to be moved from the film folder, and initialization of the array dir4 which holds the path of the musik folder.
-	10. while ((entry = readdir (folder1))) is used to list all files / directories in the foto folder.
-	11. while ((entry = readdir (folder2))) is used to list all files / directories in the film folder.
-	12. while ((entry = readdir (folder3))) is used to list all files / directories in the musik folder.
-	13. The file type can be found by entry-> d_type where 4 indicates a file and 8 indicates a directory. The name of the file can be found by entry-> d_name.
-	14. if (!strcmp (entry->d_name, ".")) and if (!strcmp (entry->d_name, "..")) In order for the directory "." and ".." does not include directories that are moved in the foto, film, musik folder
-	15. strcpy (dir2, dir) To save the path of a file 
-	16. strcpy (dir2, dir3) To save the path of a file 
-	17. strcpy (dir2, dir4) To save the path of a file  
-	18. strcat (dir2, entry-> d_name) which appends the filename / directory to the dir2 array.
-	19. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/", NULL}; to move files into folder pyoto
-	20. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/", NULL}; to move files into folder fylm
-	21. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/", NULL}; to move files into musyik
-	22. 
+   dir3[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/FILM/",
+   dir4[255]="/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/MUSIK/"; initialization array dir2 which holds the path of the foto folder, array initialization dir3 to contain the path of the file / directory to be moved from the film folder, and initialization of the array dir4 which holds the path of the musik folder.
+10. while ((entry = readdir (folder1))) is used to list all files / directories in the foto folder.
+11. while ((entry = readdir (folder2))) is used to list all files / directories in the film folder.
+12. while ((entry = readdir (folder3))) is used to list all files / directories in the musik folder.
+13. The file type can be found by entry-> d_type where 4 indicates a file and 8 indicates a directory. The name of the file can be found by entry-> d_name.
+14. if (!strcmp (entry->d_name, ".")) and if (!strcmp (entry->d_name, "..")) In order for the directory "." and ".." does not include directories that are moved in the foto, film, musik folder
+15. strcpy (dir2, dir) To save the path of a file 
+16. strcpy (dir2, dir3) To save the path of a file 
+17. strcpy (dir2, dir4) To save the path of a file  
+18. strcat (dir2, entry-> d_name) which appends the filename / directory to the dir2 array.
+19. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Pyoto/", NULL}; to move files into folder pyoto
+20. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Fylm/", NULL}; to move files into folder fylm
+21. char *argv[] = {"mv",dir2,"/home/xyncz/Documents/GitHub/soal-shift-sisop-modul-2-I08-2021/soal1/Musyik/", NULL}; to move files into musyik
+ 
 #### 1 e. When it’s her birthday, all folder will be zipped with the name Lopyu_Stevany.zip and all the folders will be deleted. (Only the zip remains).
 	int status_8;
         	while(wait(&status_8) > 0);
@@ -246,11 +246,11 @@
 	char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
                execv("/bin/zip", argv);
 ##### Explanation 1e
-	1. while(wait(&status_8) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	2. pid11 = fork(); to create a new process
-	3. if (pid11 < 0) exit(0);
-	4. if (pid11 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/zip", arg); 
-	5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
+1. while(wait(&status_8) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+2. pid11 = fork(); to create a new process
+3. if (pid11 < 0) exit(0);
+4. if (pid11 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/zip", arg); 
+5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
 #### 1 f. To make his life easier, he wants all of the above to run automatically 6 hours before her birthday (except for point e of course)
 	int status_8;
         	while(wait(&status_8) > 0);
@@ -262,11 +262,22 @@
 	char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
                execv("/bin/zip", argv);
 ##### Explanation 1f
-	1. while(wait(&status_8) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
-	2. pid11 = fork(); to create a new process
-	3. if (pid11 < 0) exit(0);
-	4. if (pid11 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/zip", arg); 
-	5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
+1. while(wait(&status_8) > 0); waiting for the child process to finish doing its job. After that, the program will create a second child process.
+2. pid11 = fork(); to create a new process
+3. if (pid11 < 0) exit(0);
+4. if (pid11 == 0) if it succeeds in creating a new process the program will create the desired folder using execv("/usr/bin/zip", arg); 
+5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
+
+##### Problem encountered
+• don't know the appropriate function & library to solve the problem
+• placement of the variable that won't be read based on the placement (inside child process or not)
+
+#### Result Image:
+![](/img/1) 6h before birthday.png)
+*6h before birthday*
+![](/img/1) on birthday.png)
+*on birthday*
+
 ### NO. 2
 #### 2 a. First, the program needs to extract the given zip into the folder “/home/[user]/modul2/petshop”. Because Loba's boss is careless, the zip may contain unimportant folders, so the program must be able to distinguish between files and folders so that it can process files that should be worked on and delete unnecessary folders.
 		pid_t cid;
