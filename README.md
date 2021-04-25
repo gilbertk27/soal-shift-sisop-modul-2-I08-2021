@@ -485,8 +485,8 @@
 #### Result Image:
 | *Result using -x mode (program will be stopped until all process ended* |
 |:--:| 
-| ![](/img/soal3/3-x2.png) | 
-| ![](/img/soal3/3-x1.png) |
+| ![](/img/soal3/3x2.png) | 
+| ![](/img/soal3/3x1.png) |
 
 | *Result using -z mode (program will be stopped immediately* |
 |:--:| 
