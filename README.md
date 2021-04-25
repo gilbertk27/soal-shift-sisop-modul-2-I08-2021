@@ -269,14 +269,18 @@
 5. char *argv[] = {"zip", "-r", "-m", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL}; to zip all folder and name it Lopyu_Stevany.zip  
 
 ##### Problem encountered
-• don't know the appropriate function & library to solve the problem
-• placement of the variable that won't be read based on the placement (inside child process or not)
+	• don't know the appropriate function & library to solve the problem
+	• placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
-![](/img/1-1.png)
-*6h before birthday*
-![](/img/1-2.png)
-*on birthday*
+| ![](/img/1-1.png) | 
+|:--:| 
+| *6h before birthday* |
+
+| ![](/img/1-2.png) | 
+|:--:| 
+| *on birthday* |
+
 
 ### NO. 2
 #### 2 a. First, the program needs to extract the given zip into the folder “/home/[user]/modul2/petshop”. Because Loba's boss is careless, the zip may contain unimportant folders, so the program must be able to distinguish between files and folders so that it can process files that should be worked on and delete unnecessary folders.
