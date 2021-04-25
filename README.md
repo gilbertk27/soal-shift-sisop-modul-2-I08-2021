@@ -273,9 +273,9 @@
 • placement of the variable that won't be read based on the placement (inside child process or not)
 
 #### Result Image:
-![](/img/1-6h before birthday.png)
+![](/img/1-1.png)
 *6h before birthday*
-![](/img/1-on birthday.png)
+![](/img/1-2.png)
 *on birthday*
 
 ### NO. 2
